@@ -7,7 +7,7 @@ import CommentListItem from './styles/CommentListItem'
 
 const Comments: React.FC = () => {
    return (
-      <CommentsList>
+      <CommentsList data-testid="comments-list">
          <CommentListItem>
             <h2>Test name</h2>
             <p>
