@@ -18,9 +18,11 @@ dl,
 dd{
   margin: 0;
 }
-ul[role="list"],
-ol[role="list"] {
+ul,
+ol {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 html:focus-within {
   scroll-behavior: smooth;
@@ -30,6 +32,7 @@ body {
   text-rendering: optimizeSpeed;
   overflow-x: hidden; 
   font: 1rem/1.6 'Rubik', sans-serif;
+  background-color: ${({ theme }) => theme.lightGrey};
 }
 a:not([class]) {
   text-decoration-skip-ink: auto;
