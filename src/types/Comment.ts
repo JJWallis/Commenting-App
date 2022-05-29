@@ -4,7 +4,12 @@ export interface Comment {
    score: number
 }
 
-export type CommentActions = {
-   type: 'ADD_COMMENT'
-   payload: Comment
-}
+export type CommentActions =
+   | {
+        type: 'ADD_COMMENT'
+        payload: Comment
+     }
+   | {
+        type: 'DELETE_COMMENT'
+        payload: number
+     }

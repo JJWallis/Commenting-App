@@ -36,6 +36,9 @@ function reducer(currState: Comment[], action: CommentActions) {
       case 'ADD_COMMENT': {
          return [...currState, action.payload]
       }
+      case 'DELETE_COMMENT': {
+         return currState.filter(({ id }) => id !== action.payload)
+      }
       default:
          return currState
    }
