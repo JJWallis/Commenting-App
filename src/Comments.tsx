@@ -20,6 +20,7 @@ const Comments: React.FC = () => {
             <CommentListItem
                key={comment.id}
                {...comment}
+               idx={idx}
                createdAt={createdAt}
                userName={username}
             />

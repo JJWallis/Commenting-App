@@ -7,3 +7,30 @@ it('comments are initially shown', () => {
       .children()
       .should('have.length.above', 0)
 })
+
+it('should enable and disable input on edit button click', () => {
+   const curr = 0
+
+   cy.get(`input[data-testid="edit-comment-input-${curr}"]`).should(
+      'be.disabled'
+   )
+   cy.get(`button[data-testid="edit-comment-btn-${curr}"]`)
+      .click()
+      .should('have.text', 'Save')
+   cy.get(`input[data-testid="edit-comment-input-${curr}"]`)
+      .should('be.enabled')
+      .should('have.focus')
+   cy.get(`button[data-testid="edit-comment-btn-${curr}"]`)
+      .click()
+      .should('have.text', 'Edit')
+   cy.get(`input[data-testid="edit-comment-input-${curr}"]`)
+      .should('be.disabled')
+      .should('not.have.focus')
+})
+
+it('should delete comment from list', () => {
+   cy.get('button[data-testid="delete-comment-btn-0"]').click()
+   cy.get('ul[data-testid="comments-list"]')
+      .children()
+      .should('have.length', '1')
+})
