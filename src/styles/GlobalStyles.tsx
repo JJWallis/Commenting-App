@@ -28,13 +28,8 @@ html:focus-within {
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
-  line-height: 1.5;
   overflow-x: hidden; 
-  font-family: ${({
-     theme: {
-        currentFont: { family },
-     },
-  }) => family}, sans-serif, monospace;
+  font: 1rem/1.6 'Rubik', sans-serif;
 }
 a:not([class]) {
   text-decoration-skip-ink: auto;
