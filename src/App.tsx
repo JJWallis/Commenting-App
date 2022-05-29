@@ -2,23 +2,42 @@ import React, { useReducer } from 'react'
 import CtWrapper from './styles/ContainerWrapper'
 import GlobalStyles from './styles/GlobalStyles'
 import Comments from './Comments'
+import data from './data.json'
 import { ThemeProvider } from 'styled-components'
 import { Theme } from './styles/Theme'
 import { Comment, CommentActions } from './types/Comment'
 import { CommentsProvider } from './CommentsContext'
 
 function getGlobalState() {
-   return []
+   // check local storage first if falsy then continue
+   const globalState = data.comments.reduce(
+      (acc: Comment[], { id, content, score, replies }) => {
+         return [
+            ...acc,
+            {
+               id,
+               content,
+               score,
+               replies: replies.map(({ id, content, score }) => ({
+                  id,
+                  content,
+                  score,
+               })),
+            },
+         ]
+      },
+      []
+   )
+   return globalState
 }
 
-function reducer(initialState: Comment[], action: CommentActions) {
-   const { type, payload } = action // BUG?
-   switch (type) {
+function reducer(currState: Comment[], action: CommentActions) {
+   switch (action.type) {
       case 'ADD_COMMENT': {
-         return [...initialState, payload]
+         return [...currState, action.payload]
       }
       default:
-         return initialState
+         return currState
    }
 }
 

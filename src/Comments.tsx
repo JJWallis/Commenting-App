@@ -9,13 +9,13 @@ const Comments: React.FC = () => {
    return (
       <CommentsList data-testid="comments-list">
          <CommentListItem>
-            <h2>Test name</h2>
+            {/* <h2>Test name</h2>
             <p>
                Lorem ipsum dolor sit amet consectetur adipisicing elit.
                Doloremque provident omnis error labore odio molestias corporis,
                optio, nesciunt dolor sunt excepturi. Repudiandae possimus eaque,
                quae et debitis rerum eum velit.
-            </p>
+            </p> */}
          </CommentListItem>
       </CommentsList>
    )
