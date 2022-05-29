@@ -34,3 +34,13 @@ it('should delete comment from list', () => {
       .children()
       .should('have.length', '1')
 })
+
+it('should edit and save comment', () => {
+   const curr = 0
+
+   cy.get(`button[data-testid="edit-comment-btn-${curr}"]`).click()
+
+   cy.get(`input[data-testid="edit-comment-input-${curr}"]`)
+      .type('Hello world')
+      .should('include.value', 'Hello world')
+})
