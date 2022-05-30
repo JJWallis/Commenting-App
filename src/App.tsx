@@ -8,9 +8,15 @@ import { Theme } from './styles/Theme'
 import { Comment, CommentActions } from './types/Comment'
 import { CommentsProvider } from './CommentsContext'
 
+function retrieveComments(): Comment[] | null {
+   const result = localStorage.getItem('comments')
+   return result ? JSON.parse(result) : null
+}
+
 function getGlobalState() {
-   // check local storage first if falsy then continue
-   const globalState = data.comments.reduce(
+   const comments = retrieveComments() || data.comments
+
+   const globalState = comments.reduce(
       (acc: Comment[], { id, content, score, replies }) => {
          return [
             ...acc,
