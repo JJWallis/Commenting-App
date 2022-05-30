@@ -44,3 +44,9 @@ it('should edit and save comment', () => {
       .type('Hello world')
       .should('include.value', 'Hello world')
 })
+
+it('should save comments in local storage', () => {
+   cy.wait(100).should(() => {
+      expect(localStorage.getItem('comments')).to.not.be.null
+   })
+})

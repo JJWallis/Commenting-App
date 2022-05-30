@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import CtWrapper from './styles/ContainerWrapper'
 import GlobalStyles from './styles/GlobalStyles'
 import Comments from './Comments'
@@ -52,6 +52,10 @@ function reducer(currState: Comment[], action: CommentActions) {
 
 const App: React.FC = () => {
    const [comments, dispatch] = useReducer(reducer, [], getGlobalState)
+
+   useEffect(() => {
+      localStorage.setItem('comments', JSON.stringify(comments))
+   }, [comments])
 
    return (
       <>
