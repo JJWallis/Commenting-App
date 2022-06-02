@@ -53,8 +53,8 @@ it('should save comments in local storage', () => {
 
 it('should show comment score and increment/decrement', () => {
    cy.get('p[data-testid="comment-score-0"]').should('be.visible')
-   cy.get('button[data-testid="increment-comment-0"]').click()
+   cy.get('button[data-testid="comment-increment-0"]').click()
    cy.get('p[data-testid="comment-score-0"]').should('have.text', '1')
-   cy.get('button[data-testid="decrement-comment-0"]').click()
+   cy.get('button[data-testid="comment-decrement-0"]').click()
    cy.get('p[data-testid="comment-score-0"]').should('have.text', '0')
 })

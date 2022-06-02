@@ -16,3 +16,8 @@ export type CommentActions =
         type: 'DELETE_COMMENT'
         payload: number
      }
+   | {
+        type: 'UPDATE_SCORE'
+        id: number
+        score: number
+     }

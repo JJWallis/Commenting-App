@@ -1,34 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CounterButton from './CounterButton'
 
 interface Props {
    score: number
    idx: number
+   id: number
 }
 
-const Counter: React.FC<Props> = ({ score, idx }) => {
-   const [count, setCount] = useState(score)
-
-   const onClick = (increment: string) => {
-      const action = increment === 'increment' ? 1 : -1
-      setCount((prev) => prev + action)
-   }
-
+const Counter: React.FC<Props> = ({ score, idx, id }) => {
    return (
       <div>
-         <CounterButton
-            count={count}
-            onClick={onClick}
-            action={'increment'}
-            idx={idx}
-         />
-         <p data-tesid={`comment-score-${idx}`}>{score}</p>
-         <CounterButton
-            action={'decrement'}
-            idx={idx}
-            onClick={onClick}
-            count={count}
-         />
+         <CounterButton action={'increment'} idx={idx} id={id} score={score} />
+         <p data-testid={`comment-score-${idx}`}>{score}</p>
+         <CounterButton action={'decrement'} idx={idx} id={id} score={score} />
       </div>
    )
 }
