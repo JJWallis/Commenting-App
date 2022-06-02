@@ -50,3 +50,11 @@ it('should save comments in local storage', () => {
       expect(localStorage.getItem('comments')).to.not.be.null
    })
 })
+
+it('should show comment score and increment/decrement', () => {
+   cy.get('p[data-testid-0="comment-score"]').should('be.visible')
+   cy.get('button[data-testid="increment-comment-0"]').click()
+   cy.get('p[data-testid-0="comment-score"]').should('have.text', '1')
+   cy.get('button[data-testid="decrement-comment-0"]').click()
+   cy.get('p[data-testid-0="comment-score"]').should('have.text', '0')
+})
