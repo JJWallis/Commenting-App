@@ -26,3 +26,8 @@ export type CommentActions =
         id: number
         score: number
      }
+   | {
+        type: 'REPLY_COMMENT'
+        comment: Comment
+        idx: number
+     }

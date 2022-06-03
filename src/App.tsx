@@ -56,6 +56,11 @@ function reducer(currState: Comment[], action: CommentActions) {
          if (desiredScore) desiredScore.score = action.score
          return curr
       }
+      case 'REPLY_COMMENT': {
+         const curr = [...currState]
+         curr.splice(action.idx + 1, 0, action.comment)
+         return curr
+      }
       case 'DELETE_COMMENT': {
          return currState.filter(({ id }) => id !== action.id)
       }
