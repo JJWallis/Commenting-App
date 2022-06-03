@@ -58,7 +58,8 @@ function reducer(currState: Comment[], action: CommentActions) {
       }
       case 'REPLY_COMMENT': {
          const curr = [...currState]
-         curr.splice(action.idx + 1, 0, action.comment)
+         const desiredComment = curr.find(({ id }) => id === action.id)
+         desiredComment?.replies.push(action.comment)
          return curr
       }
       case 'DELETE_COMMENT': {

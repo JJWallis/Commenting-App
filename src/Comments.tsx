@@ -14,14 +14,28 @@ const Comments: React.FC = () => {
             createdAt,
          } = data.comments[idx]
 
-         return (
+         const replyComments = comment.replies.map((reply) => (
             <CommentListItem
-               key={comment.id}
-               {...comment}
+               {...reply}
+               key={reply.id}
                idx={idx}
+               id={reply.id}
+               userName={data.comments[idx].user.username}
                createdAt={createdAt}
-               userName={username}
             />
+         ))
+
+         return (
+            <>
+               <CommentListItem
+                  key={comment.id}
+                  {...comment}
+                  idx={idx}
+                  createdAt={createdAt}
+                  userName={username}
+               />
+               {replyComments}
+            </>
          )
       })
 

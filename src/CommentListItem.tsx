@@ -33,6 +33,16 @@ const CommentListItem: React.FC<Props> = ({
          dispatch({ type: 'UPDATE_COMMENT', id, content: input.value })
    }
 
+   const createReplyComment = () => {
+      const replyComment = {
+         id: Date.now(),
+         content: 'test reply comment',
+         score: 0,
+         replies: [],
+      }
+      dispatch({ type: 'REPLY_COMMENT', id, comment: replyComment })
+   }
+
    useEffect(() => {
       if (!input.disabled) inputRef.current?.focus()
       // if (input.disabled)
@@ -62,6 +72,12 @@ const CommentListItem: React.FC<Props> = ({
             Delete
          </button>
          <Counter id={id} score={score} idx={idx} />
+         <button
+            data-testid={`reply-comment-btn-${idx}`}
+            onClick={createReplyComment}
+         >
+            Reply
+         </button>
       </CommentItem>
    )
 }

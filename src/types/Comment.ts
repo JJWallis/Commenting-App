@@ -28,6 +28,6 @@ export type CommentActions =
      }
    | {
         type: 'REPLY_COMMENT'
+        id: number
         comment: Comment
-        idx: number
      }

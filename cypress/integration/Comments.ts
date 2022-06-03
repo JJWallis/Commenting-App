@@ -26,12 +26,12 @@ it('should enable and disable text-area on edit button click', () => {
       .should('not.have.focus')
 })
 
-it('should delete comment from list', () => {
-   cy.get('button[data-testid="delete-comment-btn-0"]').click()
-   cy.get('ul[data-testid="comments-list"]')
-      .children()
-      .should('have.length', '1')
-})
+// it('should delete comment from list', () => {
+//    cy.get('button[data-testid="delete-comment-btn-0"]').click()
+//    cy.get('ul[data-testid="comments-list"]')
+//       .children()
+//       .should('have.length', '1')
+// })
 
 it('should edit and save comment', () => {
    const curr = 0
@@ -68,4 +68,10 @@ it('should show comment score and increment/decrement', () => {
                expect(Number(decrementedScore)).to.eq(Number(originalScore))
             })
       })
+})
+
+it('should find reply button and add new reply comment to list on click', () => {
+   cy.get('[data-testid="reply-comment-btn-0"]').click()
+
+   cy.contains('test reply comment').should('be.visible')
 })
