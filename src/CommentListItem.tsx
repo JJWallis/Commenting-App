@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Counter from './Counter'
 import { useCommentsContext } from './hooks/useCommentsContext'
 import CommentItem from './styles/CommentListItem'
 
@@ -55,6 +56,7 @@ const CommentListItem: React.FC<Props> = ({
          >
             Delete
          </button>
+         <Counter id={id} score={score} idx={idx} />
       </CommentItem>
    )
 }

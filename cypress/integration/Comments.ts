@@ -52,9 +52,22 @@ it('should save comments in local storage', () => {
 })
 
 it('should show comment score and increment/decrement', () => {
-   cy.get('p[data-testid="comment-score-0"]').should('be.visible')
-   cy.get('button[data-testid="comment-increment-0"]').click()
-   cy.get('p[data-testid="comment-score-0"]').should('have.text', '1')
-   cy.get('button[data-testid="comment-decrement-0"]').click()
-   cy.get('p[data-testid="comment-score-0"]').should('have.text', '0')
+   cy.get('p[data-testid="comment-score-0"]')
+      .should('be.visible')
+      .invoke('text')
+      .then((originalScore) => {
+         cy.get('button[data-testid="comment-increment-0"]').click()
+         cy.get('p[data-testid="comment-score-0"]')
+            .invoke('text')
+            .should((incrementedScore) => {
+               expect(Number(incrementedScore)).to.eq(Number(originalScore) + 1)
+            })
+
+         cy.get('button[data-testid="comment-decrement-0"]').click()
+         cy.get('p[data-testid="comment-score-0"]')
+            .invoke('text')
+            .should((decrementedScore) => {
+               expect(Number(decrementedScore)).to.eq(Number(originalScore))
+            })
+      })
 })

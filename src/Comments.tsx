@@ -4,8 +4,6 @@ import data from './data.json'
 import { useCommentsContext } from './hooks/useCommentsContext'
 import CommentListItem from './CommentListItem'
 
-// TODO uuid for adding comments
-
 const Comments: React.FC = () => {
    const { comments } = useCommentsContext()
 

@@ -8,6 +8,8 @@ import { Theme } from './styles/Theme'
 import { Comment, CommentActions } from './types/Comment'
 import { CommentsProvider } from './CommentsContext'
 
+// TODO uuid for adding comments
+
 function retrieveComments(): Comment[] | null {
    const result = localStorage.getItem('comments')
    return result ? JSON.parse(result) : null
