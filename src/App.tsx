@@ -44,6 +44,12 @@ function reducer(currState: Comment[], action: CommentActions) {
       case 'ADD_COMMENT': {
          return [...currState, action.comment]
       }
+      case 'UPDATE_COMMENT': {
+         const curr = [...currState]
+         const desiredComment = curr.find(({ id }) => id === action.id)
+         if (desiredComment) desiredComment.content = action.content
+         return curr
+      }
       case 'UPDATE_SCORE': {
          const curr = [...currState]
          const desiredScore = curr.find(({ id }) => id === action.id)
