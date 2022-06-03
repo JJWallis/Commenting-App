@@ -29,13 +29,15 @@ const CommentListItem: React.FC<Props> = ({
 
    const onSaveClick = () => {
       setInput({ ...input, disabled: !input.disabled })
-      if (!input.disabled) {
-         // dispatch updateComment
-      }
+      if (!input.disabled)
+         dispatch({ type: 'UPDATE_COMMENT', id, content: input.value })
    }
 
    useEffect(() => {
       if (!input.disabled) inputRef.current?.focus()
+      // if (input.disabled)
+      // dispatch({ type: 'UPDATE_COMMENT', id, content: input.value })
+      // TODO -> React v18 feats to fix
    }, [input.disabled])
 
    return (
@@ -48,9 +50,8 @@ const CommentListItem: React.FC<Props> = ({
             data-testid={`edit-comment-input-${idx}`}
             onChange={(e) => setInput({ ...input, value: e.target.value })}
             minLength={10}
-         >
-            {input.value}
-         </textarea>
+            value={input.value}
+         />
          <button data-testid={`edit-comment-btn-${idx}`} onClick={onSaveClick}>
             {input.disabled ? 'Edit' : 'Save'}
          </button>
