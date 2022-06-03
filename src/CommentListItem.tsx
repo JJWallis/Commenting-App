@@ -56,7 +56,7 @@ const CommentListItem: React.FC<Props> = ({
          </button>
          <button
             data-testid={`delete-comment-btn-${idx}`}
-            onClick={() => dispatch({ type: 'DELETE_COMMENT', payload: id })}
+            onClick={() => dispatch({ type: 'DELETE_COMMENT', id })}
          >
             Delete
          </button>

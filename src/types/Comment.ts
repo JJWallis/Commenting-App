@@ -10,11 +10,16 @@ export interface Comment {
 export type CommentActions =
    | {
         type: 'ADD_COMMENT'
-        payload: Comment
+        comment: Comment
+     }
+   | {
+        type: 'UPDATE_COMMENT'
+        id: number
+        content: string
      }
    | {
         type: 'DELETE_COMMENT'
-        payload: number
+        id: number
      }
    | {
         type: 'UPDATE_SCORE'

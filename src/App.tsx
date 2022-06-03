@@ -42,7 +42,7 @@ function getGlobalState() {
 function reducer(currState: Comment[], action: CommentActions) {
    switch (action.type) {
       case 'ADD_COMMENT': {
-         return [...currState, action.payload]
+         return [...currState, action.comment]
       }
       case 'UPDATE_SCORE': {
          const curr = [...currState]
@@ -51,7 +51,7 @@ function reducer(currState: Comment[], action: CommentActions) {
          return curr
       }
       case 'DELETE_COMMENT': {
-         return currState.filter(({ id }) => id !== action.payload)
+         return currState.filter(({ id }) => id !== action.id)
       }
       default:
          return currState
