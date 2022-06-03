@@ -9,13 +9,12 @@ interface Props {
 }
 
 const CounterButton: React.FC<Props> = ({ action, idx, id, score }) => {
-   const dataTestId = `comment-${action}-${idx}`
    const scoreAmount = action === 'increment' ? 1 : -1
    const { dispatch } = useCommentsContext()
 
    return (
       <button
-         data-testid={dataTestId}
+         data-testid={`comment-${action}-${idx}`}
          onClick={() =>
             dispatch({ type: 'UPDATE_SCORE', id, score: score + scoreAmount })
          }

@@ -8,22 +8,20 @@ it('comments are initially shown', () => {
       .should('have.length.above', 0)
 })
 
-it('should enable and disable input on edit button click', () => {
+it('should enable and disable text-area on edit button click', () => {
    const curr = 0
 
-   cy.get(`input[data-testid="edit-comment-input-${curr}"]`).should(
-      'be.disabled'
-   )
+   cy.get(`[data-testid="edit-comment-input-${curr}"]`).should('be.disabled')
    cy.get(`button[data-testid="edit-comment-btn-${curr}"]`)
       .click()
       .should('have.text', 'Save')
-   cy.get(`input[data-testid="edit-comment-input-${curr}"]`)
+   cy.get(`[data-testid="edit-comment-input-${curr}"]`)
       .should('be.enabled')
       .should('have.focus')
    cy.get(`button[data-testid="edit-comment-btn-${curr}"]`)
       .click()
       .should('have.text', 'Edit')
-   cy.get(`input[data-testid="edit-comment-input-${curr}"]`)
+   cy.get(`[data-testid="edit-comment-input-${curr}"]`)
       .should('be.disabled')
       .should('not.have.focus')
 })
@@ -40,7 +38,7 @@ it('should edit and save comment', () => {
 
    cy.get(`button[data-testid="edit-comment-btn-${curr}"]`).click()
 
-   cy.get(`input[data-testid="edit-comment-input-${curr}"]`)
+   cy.get(`[data-testid="edit-comment-input-${curr}"]`)
       .type('Hello world')
       .should('include.value', 'Hello world')
 })

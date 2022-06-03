@@ -25,9 +25,14 @@ const CommentListItem: React.FC<Props> = ({
       value: content,
    })
    const { dispatch } = useCommentsContext()
-   const inputRef = useRef<HTMLInputElement>(null)
+   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-   //    when you click save btn -> dispatch update comment action
+   const onSaveClick = () => {
+      setInput({ ...input, disabled: !input.disabled })
+      if (!input.disabled) {
+         // dispatch updateComment
+      }
+   }
 
    useEffect(() => {
       if (!input.disabled) inputRef.current?.focus()
@@ -37,17 +42,16 @@ const CommentListItem: React.FC<Props> = ({
       <CommentItem key={id}>
          <h2>{userName}</h2>
          <p>{createdAt}</p>
-         <input
-            value={input.value}
-            disabled={input.disabled}
+         <textarea
             ref={inputRef}
+            disabled={input.disabled}
             data-testid={`edit-comment-input-${idx}`}
             onChange={(e) => setInput({ ...input, value: e.target.value })}
-         />
-         <button
-            data-testid={`edit-comment-btn-${idx}`}
-            onClick={() => setInput({ ...input, disabled: !input.disabled })}
+            minLength={10}
          >
+            {input.value}
+         </textarea>
+         <button data-testid={`edit-comment-btn-${idx}`} onClick={onSaveClick}>
             {input.disabled ? 'Edit' : 'Save'}
          </button>
          <button
