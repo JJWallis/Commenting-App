@@ -22,7 +22,6 @@ const Comments: React.FC = () => {
                id={reply.id}
                userName={data.comments[idx].user.username}
                createdAt={createdAt}
-               reply
             />
          ))
 
@@ -35,7 +34,9 @@ const Comments: React.FC = () => {
                   createdAt={createdAt}
                   userName={username}
                />
-               {replyComments}
+               <CommentsList replies data-testid="replies-list">
+                  {replyComments}
+               </CommentsList>
             </>
          )
       })

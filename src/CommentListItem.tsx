@@ -13,7 +13,6 @@ interface Props {
    createdAt: string
    userName: string
    idx: number
-   reply?: boolean
 }
 
 const CommentListItem: React.FC<Props> = ({
@@ -23,7 +22,6 @@ const CommentListItem: React.FC<Props> = ({
    userName,
    createdAt,
    idx,
-   reply,
 }) => {
    const [input, setInput] = useState({
       disabled: true,
@@ -56,7 +54,7 @@ const CommentListItem: React.FC<Props> = ({
    }, [input.disabled])
 
    return (
-      <CommentItem key={id} reply={reply}>
+      <CommentItem key={id}>
          <CommentMeta header>
             <CommentMeta>
                <UserName>{userName}</UserName>

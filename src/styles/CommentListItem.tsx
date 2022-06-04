@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 
-interface Props {
-   reply?: boolean
-}
-
-export default styled.li<Props>`
+export default styled.li`
    position: relative;
    background-color: ${({ theme }) => theme.softWhite};
    padding: 1rem 1rem 1rem 5rem;
    border-radius: 5px;
+   width: 100%;
    margin-block: 1rem;
-   width: ${({ reply }) => (reply ? '85%' : '100%')};
 `
