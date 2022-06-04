@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import Counter from './Counter'
 import { useCommentsContext } from './hooks/useCommentsContext'
 import CommentItem from './styles/CommentListItem'
+import CommentMeta from './styles/CommentMeta'
+import UserName from './styles/UserName'
 
 interface Props {
    id: number
@@ -10,6 +12,7 @@ interface Props {
    createdAt: string
    userName: string
    idx: number
+   reply?: boolean
 }
 
 const CommentListItem: React.FC<Props> = ({
@@ -19,6 +22,7 @@ const CommentListItem: React.FC<Props> = ({
    userName,
    createdAt,
    idx,
+   reply,
 }) => {
    const [input, setInput] = useState({
       disabled: true,
@@ -51,9 +55,33 @@ const CommentListItem: React.FC<Props> = ({
    }, [input.disabled])
 
    return (
-      <CommentItem key={id}>
-         <h2>{userName}</h2>
-         <p>{createdAt}</p>
+      <CommentItem key={id} reply={reply}>
+         <CommentMeta header>
+            <CommentMeta>
+               <UserName>{userName}</UserName>
+               <UserName>{createdAt}</UserName>
+            </CommentMeta>
+            <div>
+               <button
+                  data-testid={`edit-comment-btn-${idx}`}
+                  onClick={onSaveClick}
+               >
+                  {input.disabled ? 'Edit' : 'Save'}
+               </button>
+               <button
+                  data-testid={`delete-comment-btn-${idx}`}
+                  onClick={() => dispatch({ type: 'DELETE_COMMENT', id })}
+               >
+                  Delete
+               </button>
+               <button
+                  data-testid={`reply-comment-btn-${idx}`}
+                  onClick={createReplyComment}
+               >
+                  Reply
+               </button>
+            </div>
+         </CommentMeta>
          <textarea
             ref={inputRef}
             disabled={input.disabled}
@@ -62,22 +90,8 @@ const CommentListItem: React.FC<Props> = ({
             minLength={10}
             value={input.value}
          />
-         <button data-testid={`edit-comment-btn-${idx}`} onClick={onSaveClick}>
-            {input.disabled ? 'Edit' : 'Save'}
-         </button>
-         <button
-            data-testid={`delete-comment-btn-${idx}`}
-            onClick={() => dispatch({ type: 'DELETE_COMMENT', id })}
-         >
-            Delete
-         </button>
+
          <Counter id={id} score={score} idx={idx} />
-         <button
-            data-testid={`reply-comment-btn-${idx}`}
-            onClick={createReplyComment}
-         >
-            Reply
-         </button>
       </CommentItem>
    )
 }

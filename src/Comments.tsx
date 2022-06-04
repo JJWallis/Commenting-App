@@ -22,6 +22,7 @@ const Comments: React.FC = () => {
                id={reply.id}
                userName={data.comments[idx].user.username}
                createdAt={createdAt}
+               reply
             />
          ))
 
