@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
 export default styled.ul`
-   /* outline: 1px solid black; */
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
 `

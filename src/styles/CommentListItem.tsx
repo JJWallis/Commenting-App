@@ -10,5 +10,5 @@ export default styled.li<Props>`
    padding: 1rem 1rem 1rem 5rem;
    border-radius: 5px;
    margin-block: 1rem;
-   width: ${({ reply }) => reply && '85%'};
+   width: ${({ reply }) => (reply ? '85%' : '100%')};
 `
