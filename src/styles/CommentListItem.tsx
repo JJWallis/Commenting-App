@@ -6,5 +6,4 @@ export default styled.li`
    padding: 1rem 1rem 1rem 5rem;
    border-radius: 5px;
    width: 100%;
-   margin-block: 1rem;
 `
