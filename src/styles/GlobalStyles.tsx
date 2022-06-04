@@ -61,6 +61,12 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-} `
+}
+
+button { 
+    border: none;
+    background-color: transparent;
+  }
+`
 
 export default GlobalStyles
