@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Counter from './Counter'
 import { useCommentsContext } from './hooks/useCommentsContext'
+import CommentContent from './styles/CommentContent'
 import CommentItem from './styles/CommentListItem'
 import CommentMeta from './styles/CommentMeta'
 import UserName from './styles/UserName'
@@ -82,7 +83,7 @@ const CommentListItem: React.FC<Props> = ({
                </button>
             </div>
          </CommentMeta>
-         <textarea
+         <CommentContent
             ref={inputRef}
             disabled={input.disabled}
             data-testid={`edit-comment-input-${idx}`}
