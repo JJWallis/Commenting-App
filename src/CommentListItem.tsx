@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Counter from './Counter'
 import { useCommentsContext } from './hooks/useCommentsContext'
+import DeleteIcon from '../src/assets/icon-delete.svg'
+import EditIcon from '../src/assets/icon-edit.svg'
+import ReplyIcon from '../src/assets/icon-reply.svg'
+import CommentButton from './styles/CommentButton'
 import CommentContent from './styles/CommentContent'
 import CommentItem from './styles/CommentListItem'
 import CommentMeta from './styles/CommentMeta'
@@ -60,25 +64,35 @@ const CommentListItem: React.FC<Props> = ({
                <UserName>{userName}</UserName>
                <UserName>{createdAt}</UserName>
             </CommentMeta>
-            <div>
-               <button
+            <div
+               style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+               }}
+            >
+               <CommentButton
+                  iconSrc={EditIcon}
                   data-testid={`edit-comment-btn-${idx}`}
                   onClick={onSaveClick}
                >
                   {input.disabled ? 'Edit' : 'Save'}
-               </button>
-               <button
+               </CommentButton>
+               <CommentButton
+                  delete
+                  iconSrc={DeleteIcon}
                   data-testid={`delete-comment-btn-${idx}`}
                   onClick={() => dispatch({ type: 'DELETE_COMMENT', id })}
                >
                   Delete
-               </button>
-               <button
+               </CommentButton>
+               <CommentButton
+                  iconSrc={ReplyIcon}
                   data-testid={`reply-comment-btn-${idx}`}
                   onClick={createReplyComment}
                >
                   Reply
-               </button>
+               </CommentButton>
             </div>
          </CommentMeta>
          <CommentContent
@@ -89,7 +103,6 @@ const CommentListItem: React.FC<Props> = ({
             minLength={10}
             value={input.value}
          />
-
          <Counter id={id} score={score} idx={idx} />
       </CommentItem>
    )

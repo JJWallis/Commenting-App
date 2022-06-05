@@ -68,6 +68,10 @@ button {
     background-color: transparent;
     padding: 0;
   }
+
+  :focus {
+    outline: 3px dotted ${({ theme }) => theme.blue};
+  }
 `
 
 export default GlobalStyles
