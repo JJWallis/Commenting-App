@@ -17,6 +17,7 @@ const Comments: React.FC = () => {
 
          const replyComments = comment.replies.map((reply) => (
             <CommentListItem
+               isReply
                key={uuid()}
                {...reply}
                idx={idx}

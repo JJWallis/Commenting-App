@@ -52,7 +52,9 @@ function reducer(currState: Comment[], action: CommentActions) {
       }
       case 'UPDATE_SCORE': {
          const curr = [...currState]
-         const desiredScore = curr.find(({ id }) => id === action.id)
+         const desiredScore = curr.find(({ id, replies }, idx) =>
+            !action.isReply ? id : replies[idx].id === action.id
+         )
          if (desiredScore) desiredScore.score = action.score
          return curr
       }

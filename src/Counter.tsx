@@ -7,16 +7,29 @@ interface Props {
    score: number
    idx: number
    id: number
+   isReply?: boolean
 }
 
-const Counter: React.FC<Props> = ({ score, idx, id }) => {
+const Counter: React.FC<Props> = ({ score, idx, id, isReply }) => {
    return (
       <CounterContainer>
-         <CounterButton action={'increment'} idx={idx} id={id} score={score} />
+         <CounterButton
+            action={'increment'}
+            idx={idx}
+            id={id}
+            score={score}
+            isReply={isReply}
+         />
          <CounterValue data-testid={`comment-score-${idx}`}>
             {score}
          </CounterValue>
-         <CounterButton action={'decrement'} idx={idx} id={id} score={score} />
+         <CounterButton
+            action={'decrement'}
+            idx={idx}
+            id={id}
+            score={score}
+            isReply={isReply}
+         />
       </CounterContainer>
    )
 }

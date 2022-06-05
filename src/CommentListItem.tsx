@@ -25,8 +25,6 @@ const useHandleClickOutside = <T extends React.RefObject<HTMLElement> | null>(
             const target = e.target as HTMLElement
             if (!elRef?.current?.contains(target)) {
                callbackRef.current()
-               console.log(!elRef?.current?.contains(target))
-               console.log(elRef?.current)
             }
          }
 
@@ -45,6 +43,7 @@ interface Props {
    createdAt: string
    userName: string
    idx: number
+   isReply?: boolean
 }
 
 const CommentListItem: React.FC<Props> = ({
@@ -54,6 +53,7 @@ const CommentListItem: React.FC<Props> = ({
    userName,
    createdAt,
    idx,
+   isReply,
 }) => {
    const [input, setInput] = useState({
       disabled: true,
@@ -139,7 +139,7 @@ const CommentListItem: React.FC<Props> = ({
             minLength={10}
             value={input.value}
          />
-         <Counter id={id} score={score} idx={idx} />
+         <Counter id={id} score={score} idx={idx} isReply={isReply} />
       </CommentItem>
    )
 }

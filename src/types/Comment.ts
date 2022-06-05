@@ -25,6 +25,7 @@ export type CommentActions =
         type: 'UPDATE_SCORE'
         id: number
         score: number
+        isReply: boolean | undefined
      }
    | {
         type: 'REPLY_COMMENT'

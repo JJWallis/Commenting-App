@@ -9,9 +9,16 @@ interface Props {
    idx: number
    id: number
    score: number
+   isReply?: boolean
 }
 
-const CounterButton: React.FC<Props> = ({ action, idx, id, score }) => {
+const CounterButton: React.FC<Props> = ({
+   action,
+   idx,
+   id,
+   score,
+   isReply,
+}) => {
    const [scoreAmount, iconSrc] =
       action === 'increment' ? [1, IconPus] : [-1, IconMinus]
    const { dispatch } = useCommentsContext()
@@ -20,7 +27,12 @@ const CounterButton: React.FC<Props> = ({ action, idx, id, score }) => {
       <CounterBtn
          data-testid={`comment-${action}-${idx}`}
          onClick={() =>
-            dispatch({ type: 'UPDATE_SCORE', id, score: score + scoreAmount })
+            dispatch({
+               type: 'UPDATE_SCORE',
+               id,
+               score: score + scoreAmount,
+               isReply,
+            })
          }
          iconSrc={iconSrc}
       />
