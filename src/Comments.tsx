@@ -1,4 +1,5 @@
 import React from 'react'
+import { v4 as uuid } from 'uuid'
 import CommentsList from './styles/CommentsList'
 import data from './data.json'
 import { useCommentsContext } from './hooks/useCommentsContext'
@@ -16,8 +17,8 @@ const Comments: React.FC = () => {
 
          const replyComments = comment.replies.map((reply) => (
             <CommentListItem
+               key={uuid()}
                {...reply}
-               key={reply.id}
                idx={idx}
                id={reply.id}
                userName={data.comments[idx].user.username}
@@ -26,9 +27,8 @@ const Comments: React.FC = () => {
          ))
 
          return (
-            <>
+            <React.Fragment key={uuid()}>
                <CommentListItem
-                  key={comment.id}
                   {...comment}
                   idx={idx}
                   createdAt={createdAt}
@@ -37,7 +37,7 @@ const Comments: React.FC = () => {
                <CommentsList replies data-testid="replies-list">
                   {replyComments}
                </CommentsList>
-            </>
+            </React.Fragment>
          )
       })
 

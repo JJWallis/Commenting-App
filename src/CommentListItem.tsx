@@ -9,6 +9,28 @@ import CommentContent from './styles/CommentContent'
 import CommentItem from './styles/CommentListItem'
 import CommentMeta from './styles/CommentMeta'
 import UserName from './styles/UserName'
+import { v4 } from 'uuid'
+
+const useHandleClickOutside = <T extends React.RefObject<HTMLElement>>(
+   elRef: T,
+   callback: any
+) => {
+   const callbackRef = useRef(callback)
+
+   useEffect(() => {
+      const onClick = (e: MouseEvent) => {
+         const target = e.target as HTMLElement
+         if (elRef.current && !elRef.current.contains(target)) {
+            callbackRef.current()
+         }
+      }
+
+      document.addEventListener('click', onClick, true)
+      return () => {
+         document.removeEventListener('click', onClick, true)
+      }
+   }, [elRef, callbackRef])
+}
 
 interface Props {
    id: number
@@ -33,6 +55,10 @@ const CommentListItem: React.FC<Props> = ({
    })
    const { dispatch } = useCommentsContext()
    const inputRef = useRef<HTMLTextAreaElement>(null)
+   const listItemRef = useRef<HTMLLIElement>(null)
+   useHandleClickOutside(listItemRef, () => {
+      if (!input.disabled) setInput({ ...input, disabled: !input.disabled })
+   })
 
    const onSaveClick = () => {
       setInput({ ...input, disabled: !input.disabled })
@@ -58,7 +84,7 @@ const CommentListItem: React.FC<Props> = ({
    }, [input.disabled])
 
    return (
-      <CommentItem key={id}>
+      <CommentItem key={v4()} ref={listItemRef}>
          <CommentMeta header>
             <CommentMeta>
                <UserName>{userName}</UserName>
