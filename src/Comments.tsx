@@ -21,8 +21,8 @@ const Comments: React.FC = () => {
                key={uuid()}
                {...reply}
                idx={idx}
-               userName={data.comments[idx].replies[idx].user.username}
-               createdAt={data.comments[idx].replies[idx].createdAt}
+               userName={data.comments[idx]?.replies[idx]?.user?.username}
+               createdAt={data.comments[idx]?.replies[idx]?.createdAt}
             />
          ))
 

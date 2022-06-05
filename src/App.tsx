@@ -8,8 +8,6 @@ import { Theme } from './styles/Theme'
 import { Comment, CommentActions } from './types/Comment'
 import { CommentsProvider } from './CommentsContext'
 
-// TODO uuid for adding comments
-
 function retrieveComments(): Comment[] | null {
    const result = localStorage.getItem('comments')
    return result ? JSON.parse(result) : null
@@ -76,12 +74,22 @@ function reducer(currState: Comment[], action: CommentActions) {
          return curr
       }
       case 'DELETE_COMMENT': {
-         return currState.filter(({ id }) => id !== action.id)
+         const curr = [...currState]
+         if (!action.isReply) {
+            return curr.filter(({ id }) => id !== action.id)
+         } else {
+            return curr.map((comment) => ({
+               ...comment,
+               replies: comment.replies.filter(({ id }) => id !== action.id),
+            }))
+         }
       }
       default:
          return currState
    }
 }
+
+localStorage.clear()
 
 const App: React.FC = () => {
    const [comments, dispatch] = useReducer(reducer, [], getGlobalState)

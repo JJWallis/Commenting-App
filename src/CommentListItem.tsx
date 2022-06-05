@@ -118,7 +118,9 @@ const CommentListItem: React.FC<Props> = ({
                   delete
                   iconSrc={DeleteIcon}
                   data-testid={`delete-comment-btn-${idx}`}
-                  onClick={() => dispatch({ type: 'DELETE_COMMENT', id })}
+                  onClick={() =>
+                     dispatch({ type: 'DELETE_COMMENT', id, isReply })
+                  }
                >
                   Delete
                </CommentButton>

@@ -20,6 +20,7 @@ export type CommentActions =
    | {
         type: 'DELETE_COMMENT'
         id: number
+        isReply: boolean | undefined
      }
    | {
         type: 'UPDATE_SCORE'
