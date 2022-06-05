@@ -21,9 +21,8 @@ const Comments: React.FC = () => {
                key={uuid()}
                {...reply}
                idx={idx}
-               id={reply.id}
-               userName={data.comments[idx].user.username}
-               createdAt={createdAt}
+               userName={data.comments[idx].replies[idx].user.username}
+               createdAt={data.comments[idx].replies[idx].createdAt}
             />
          ))
 
@@ -32,8 +31,8 @@ const Comments: React.FC = () => {
                <CommentListItem
                   {...comment}
                   idx={idx}
-                  createdAt={createdAt}
                   userName={username}
+                  createdAt={createdAt}
                />
                <CommentsList replies data-testid="replies-list">
                   {replyComments}

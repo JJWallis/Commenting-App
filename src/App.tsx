@@ -52,10 +52,18 @@ function reducer(currState: Comment[], action: CommentActions) {
       }
       case 'UPDATE_SCORE': {
          const curr = [...currState]
-         const desiredScore = curr.find(({ id, replies }, idx) =>
-            !action.isReply ? id : replies[idx].id === action.id
-         )
-         if (desiredScore) desiredScore.score = action.score
+         if (!action.isReply) {
+            const desiredScore = curr.find(({ id }) => id === action.id)
+            if (desiredScore) desiredScore.score = action.score
+         } else {
+            const desiredScore = curr.findIndex(
+               ({ replies }) =>
+                  replies.length && replies.find(({ id }) => id === action.id)
+            )
+            console.log(desiredScore)
+            // if (desiredScore) desiredScore.score = action.score
+         }
+
          return curr
       }
       case 'REPLY_COMMENT': {
