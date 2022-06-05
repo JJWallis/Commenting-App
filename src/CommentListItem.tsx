@@ -11,28 +11,31 @@ import CommentMeta from './styles/CommentMeta'
 import UserName from './styles/UserName'
 import { v4 as uuid } from 'uuid'
 
-const useHandleClickOutside = <T extends React.RefObject<HTMLElement>>(
+const useHandleClickOutside = <T extends React.RefObject<HTMLElement> | null>(
    elRef: T,
-   callback: any
+   callback: any,
+   isActiveComment: boolean
 ) => {
    const callbackRef = useRef<typeof callback | null>(null)
    callbackRef.current = callback
 
    useEffect(() => {
-      const onClick = (e: MouseEvent) => {
-         const target = e.target as HTMLElement
-         if (!elRef?.current?.contains(target)) {
-            callbackRef.current()
-            console.log(!elRef?.current?.contains(target))
-            console.log(elRef?.current)
+      if (isActiveComment) {
+         const onClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement
+            if (!elRef?.current?.contains(target)) {
+               callbackRef.current()
+               console.log(!elRef?.current?.contains(target))
+               console.log(elRef?.current)
+            }
+         }
+
+         document.addEventListener('click', onClick, true)
+         return () => {
+            document.removeEventListener('click', onClick, true)
          }
       }
-
-      document.addEventListener('click', onClick, true)
-      return () => {
-         document.removeEventListener('click', onClick, true)
-      }
-   }, [elRef, callbackRef])
+   }, [elRef, callbackRef, isActiveComment])
 }
 
 interface Props {
@@ -59,9 +62,13 @@ const CommentListItem: React.FC<Props> = ({
    const { dispatch } = useCommentsContext()
    const inputRef = useRef<HTMLTextAreaElement>(null)
    const listItemRef = useRef(null)
-   useHandleClickOutside(listItemRef, () => {
-      if (!input.disabled) setInput({ ...input, disabled: !input.disabled })
-   })
+   useHandleClickOutside(
+      listItemRef,
+      () => {
+         if (!input.disabled) setInput({ ...input, disabled: !input.disabled })
+      },
+      !input.disabled
+   )
 
    const onSaveClick = () => {
       setInput({ ...input, disabled: !input.disabled })
