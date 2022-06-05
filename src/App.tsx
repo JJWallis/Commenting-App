@@ -56,12 +56,15 @@ function reducer(currState: Comment[], action: CommentActions) {
             const desiredScore = curr.find(({ id }) => id === action.id)
             if (desiredScore) desiredScore.score = action.score
          } else {
-            const desiredScore = curr.findIndex(
-               ({ replies }) =>
-                  replies.length && replies.find(({ id }) => id === action.id)
-            )
-            console.log(desiredScore)
-            // if (desiredScore) desiredScore.score = action.score
+            curr.forEach(({ replies }) => {
+               if (replies.length) {
+                  const desiredReply = replies.find(
+                     ({ id }) => id === action.id
+                  )
+                  if (desiredReply) desiredReply.score = action.score
+               }
+            })
+            return curr
          }
 
          return curr
