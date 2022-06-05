@@ -5,6 +5,15 @@ import data from './data.json'
 import { useCommentsContext } from './hooks/useCommentsContext'
 import CommentListItem from './CommentListItem'
 
+// TODO -> dynamic ref assignment with Map here in parent
+// store clickOutside hook here + pass dynamic elRef in from child
+// init to null + helper func to initialize it + callbackRef passed down to child
+// which is then run in a useEffect whenever whenever click outside current list item
+// determine current listItem by whether textarea is enabled
+// array of refs for each list item (not needed for callback refs since same)
+// also pass in boolean to determine which textarea is enabled (disabled state)
+// spread there into dependency array
+
 const Comments: React.FC = () => {
    const { comments } = useCommentsContext()
 
