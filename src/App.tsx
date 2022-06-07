@@ -69,8 +69,15 @@ function reducer(currState: Comment[], action: CommentActions) {
       }
       case 'REPLY_COMMENT': {
          const curr = [...currState]
-         const desiredComment = curr.find(({ id }) => id === action.id)
-         desiredComment?.replies.push(action.comment)
+         const desiredComment = curr.find(({ id, replies }) =>
+            !action.isReply
+               ? id === action.id
+               : replies.find((reply) => reply.id === action.id)
+         )
+         if (
+            !desiredComment?.replies.find(({ id }) => id === action.comment.id)
+         )
+            desiredComment?.replies.push(action.comment)
          return curr
       }
       case 'DELETE_COMMENT': {

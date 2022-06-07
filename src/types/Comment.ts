@@ -32,4 +32,5 @@ export type CommentActions =
         type: 'REPLY_COMMENT'
         id: number
         comment: Comment
+        isReply: boolean | undefined
      }

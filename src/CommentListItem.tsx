@@ -83,14 +83,15 @@ const CommentListItem: React.FC<Props> = ({
          score: 0,
          replies: [],
       }
-      dispatch({ type: 'REPLY_COMMENT', id, comment: replyComment })
+      dispatch({ type: 'REPLY_COMMENT', id, comment: replyComment, isReply })
    }
 
    useEffect(() => {
       if (!input.disabled) inputRef.current?.focus()
+      // TODO -> React v18 feats to fix
+      // hook up to global state
       // if (input.disabled)
       // dispatch({ type: 'UPDATE_COMMENT', id, content: input.value })
-      // TODO -> React v18 feats to fix
    }, [input.disabled])
 
    return (
