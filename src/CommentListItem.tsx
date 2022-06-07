@@ -55,26 +55,17 @@ const CommentListItem: React.FC<Props> = ({
    idx,
    isReply,
 }) => {
-   const [input, setInput] = useState({
-      disabled: true,
-      value: content,
-   })
+   const [disabled, setDisabled] = useState(true)
    const { dispatch } = useCommentsContext()
    const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
    const listItemRef = useRef(null)
    useHandleClickOutside(
       listItemRef,
       () => {
-         if (!input.disabled) setInput({ ...input, disabled: !input.disabled })
+         if (!disabled) setDisabled(!disabled)
       },
-      !input.disabled
+      !disabled
    )
-
-   const onSaveClick = () => {
-      setInput({ ...input, disabled: !input.disabled })
-      if (!input.disabled)
-         dispatch({ type: 'UPDATE_COMMENT', id, content: input.value })
-   }
 
    const createReplyComment = () => {
       const replyComment = {
@@ -87,11 +78,8 @@ const CommentListItem: React.FC<Props> = ({
    }
 
    useEffect(() => {
-      if (!input.disabled) textAreaRef.current?.focus()
-      // TODO -> React v18 feats to fix
-      // if (input.disabled)
-      // dispatch({ type: 'UPDATE_COMMENT', id, content: input.value })
-   }, [input.disabled])
+      if (!disabled) textAreaRef.current?.focus()
+   }, [disabled])
 
    return (
       <CommentItem key={uuid()} ref={listItemRef}>
@@ -110,9 +98,9 @@ const CommentListItem: React.FC<Props> = ({
                <CommentButton
                   iconSrc={EditIcon}
                   data-testid={`edit-comment-btn-${idx}`}
-                  onClick={onSaveClick}
+                  onClick={() => setDisabled(!disabled)}
                >
-                  {input.disabled ? 'Edit' : 'Save'}
+                  {disabled ? 'Edit' : 'Save'}
                </CommentButton>
                <CommentButton
                   delete
@@ -135,11 +123,13 @@ const CommentListItem: React.FC<Props> = ({
          </CommentMeta>
          <CommentContent
             ref={textAreaRef}
-            disabled={input.disabled}
+            disabled={disabled}
             data-testid={`edit-comment-input-${idx}`}
-            onChange={(e) => setInput({ ...input, value: e.target.value })}
+            onChange={(e) =>
+               dispatch({ type: 'UPDATE_COMMENT', id, content: e.target.value })
+            }
             minLength={10}
-            value={input.value}
+            value={content}
          />
          <Counter id={id} score={score} idx={idx} isReply={isReply} />
       </CommentItem>
