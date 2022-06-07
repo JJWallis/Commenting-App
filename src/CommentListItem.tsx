@@ -62,7 +62,7 @@ const CommentListItem: React.FC<Props> = ({
    useHandleClickOutside(
       listItemRef,
       () => {
-         if (!disabled) setDisabled(!disabled)
+         if (!disabled) setDisabled(true)
       },
       !disabled
    )
@@ -79,6 +79,9 @@ const CommentListItem: React.FC<Props> = ({
 
    useEffect(() => {
       if (!disabled) textAreaRef.current?.focus()
+
+      // TODO -> React v18 -> research no more useEffect article
+      console.log('firing', disabled)
    }, [disabled])
 
    return (
