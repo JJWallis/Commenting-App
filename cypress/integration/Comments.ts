@@ -13,14 +13,14 @@ it('should enable and disable text-area on edit button click', () => {
 
    cy.get(`[data-testid="edit-comment-input-${curr}"]`).should('be.disabled')
    cy.get(`button[data-testid="edit-comment-btn-${curr}"]`)
+      .should('have.text', 'Edit')
       .click()
-      .should('have.text', 'Save')
    cy.get(`[data-testid="edit-comment-input-${curr}"]`)
       .should('be.enabled')
       .should('have.focus')
    cy.get(`button[data-testid="edit-comment-btn-${curr}"]`)
+      .should('have.text', 'Save')
       .click()
-      .should('have.text', 'Edit')
    cy.get(`[data-testid="edit-comment-input-${curr}"]`)
       .should('be.disabled')
       .should('not.have.focus')
@@ -33,7 +33,7 @@ it('should enable and disable text-area on edit button click', () => {
 //       .should('have.length', '1')
 // })
 
-it('should edit and save comment', () => {
+it.only('should edit and save comment', () => {
    const curr = 0
 
    cy.get(`button[data-testid="edit-comment-btn-${curr}"]`).click()

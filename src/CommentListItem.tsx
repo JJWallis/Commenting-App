@@ -60,7 +60,7 @@ const CommentListItem: React.FC<Props> = ({
       value: content,
    })
    const { dispatch } = useCommentsContext()
-   const inputRef = useRef<HTMLTextAreaElement>(null)
+   const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
    const listItemRef = useRef(null)
    useHandleClickOutside(
       listItemRef,
@@ -87,9 +87,8 @@ const CommentListItem: React.FC<Props> = ({
    }
 
    useEffect(() => {
-      if (!input.disabled) inputRef.current?.focus()
+      if (!input.disabled) textAreaRef.current?.focus()
       // TODO -> React v18 feats to fix
-      // hook up to global state
       // if (input.disabled)
       // dispatch({ type: 'UPDATE_COMMENT', id, content: input.value })
    }, [input.disabled])
@@ -135,7 +134,7 @@ const CommentListItem: React.FC<Props> = ({
             </div>
          </CommentMeta>
          <CommentContent
-            ref={inputRef}
+            ref={textAreaRef}
             disabled={input.disabled}
             data-testid={`edit-comment-input-${idx}`}
             onChange={(e) => setInput({ ...input, value: e.target.value })}
