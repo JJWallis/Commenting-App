@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Counter from './Counter'
-import { useCommentsContext } from './hooks/useCommentsContext'
 import DeleteIcon from '../src/assets/icon-delete.svg'
 import EditIcon from '../src/assets/icon-edit.svg'
 import ReplyIcon from '../src/assets/icon-reply.svg'
@@ -10,6 +9,7 @@ import CommentItem from './styles/CommentListItem'
 import CommentMeta from './styles/CommentMeta'
 import UserName from './styles/UserName'
 import { v4 as uuid } from 'uuid'
+import { useDispatchContext } from './hooks/useDispatchContext'
 
 const useHandleClickOutside = <T extends React.RefObject<HTMLElement> | null>(
    elRef: T,
@@ -56,7 +56,8 @@ const CommentListItem: React.FC<Props> = ({
    isReply,
 }) => {
    const [disabled, setDisabled] = useState(true)
-   const { dispatch } = useCommentsContext()
+   const [search, setSearch] = useState(content)
+   const dispatch = useDispatchContext()
    const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
    const listItemRef = useRef(null)
    useHandleClickOutside(
@@ -78,9 +79,17 @@ const CommentListItem: React.FC<Props> = ({
    }
 
    useEffect(() => {
-      if (!disabled) textAreaRef.current?.focus()
+      if (!disabled) {
+         textAreaRef.current?.focus()
+         // dispatch({
+         //    type: 'UPDATE_COMMENT',
+         //    id,
+         //    content: search,
+         // })
+      }
 
       // TODO -> React v18 -> research no more useEffect article
+
       console.log('firing', disabled)
    }, [disabled])
 
@@ -128,11 +137,9 @@ const CommentListItem: React.FC<Props> = ({
             ref={textAreaRef}
             disabled={disabled}
             data-testid={`edit-comment-input-${idx}`}
-            onChange={(e) =>
-               dispatch({ type: 'UPDATE_COMMENT', id, content: e.target.value })
-            }
+            onChange={(e) => setSearch(e.target.value)}
             minLength={10}
-            value={content}
+            value={search}
          />
          <Counter id={id} score={score} idx={idx} isReply={isReply} />
       </CommentItem>

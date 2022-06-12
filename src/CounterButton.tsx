@@ -2,7 +2,7 @@ import React from 'react'
 import CounterBtn from './styles/CounterButton'
 import IconPus from '../src/assets/icon-plus.svg'
 import IconMinus from '../src/assets/icon-minus.svg'
-import { useCommentsContext } from './hooks/useCommentsContext'
+import { useDispatchContext } from './hooks/useDispatchContext'
 
 interface Props {
    action: string
@@ -21,7 +21,7 @@ const CounterButton: React.FC<Props> = ({
 }) => {
    const [scoreAmount, iconSrc] =
       action === 'increment' ? [1, IconPus] : [-1, IconMinus]
-   const { dispatch } = useCommentsContext()
+   const dispatch = useDispatchContext()
 
    return (
       <CounterBtn

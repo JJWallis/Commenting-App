@@ -1,24 +1,16 @@
 import React, { createContext } from 'react'
-import { Comment, CommentActions } from './types/Comment'
+import { Comment } from './types/Comment'
 
-export const CommentsContext = createContext<{
-   comments: Comment[]
-   dispatch: React.Dispatch<CommentActions>
-} | null>(null)
+export const CommentsContext = createContext<Comment[] | null>(null)
 
 interface Props {
    children: React.ReactNode
    comments: Comment[]
-   dispatch: React.Dispatch<CommentActions>
 }
 
-export const CommentsProvider: React.FC<Props> = ({
-   children,
-   comments,
-   dispatch,
-}) => {
+export const CommentsProvider: React.FC<Props> = ({ children, comments }) => {
    return (
-      <CommentsContext.Provider value={{ comments, dispatch }}>
+      <CommentsContext.Provider value={comments}>
          {children}
       </CommentsContext.Provider>
    )

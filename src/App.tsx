@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components'
 import { Theme } from './styles/Theme'
 import { Comment, CommentActions } from './types/Comment'
 import { CommentsProvider } from './CommentsContext'
+import { CommentsDispatchProvider } from './CommentsDispatchContext'
 
 function retrieveComments(): Comment[] | null {
    const result = localStorage.getItem('comments')
@@ -108,11 +109,13 @@ const App: React.FC = () => {
    return (
       <>
          <ThemeProvider theme={Theme}>
-            <CommentsProvider comments={comments} dispatch={dispatch}>
-               <GlobalStyles />
-               <CtWrapper>
-                  <Comments />
-               </CtWrapper>
+            <CommentsProvider comments={comments}>
+               <CommentsDispatchProvider dispatch={dispatch}>
+                  <GlobalStyles />
+                  <CtWrapper>
+                     <Comments />
+                  </CtWrapper>
+               </CommentsDispatchProvider>
             </CommentsProvider>
          </ThemeProvider>
       </>
