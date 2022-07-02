@@ -10,6 +10,17 @@ export default {
    component: CounterButton,
 }
 
+export const Template = (args) => (
+   <ThemeProvider theme={Theme}>
+      <CommentsProvider comments={[]}>
+         <CommentsDispatchProvider dispatch={() => {}}>
+            <GlobalStyles />
+            <CounterButton {...args} />
+         </CommentsDispatchProvider>
+      </CommentsProvider>
+   </ThemeProvider>
+)
+
 export const Grey = () => (
    <ThemeProvider theme={Theme}>
       <CommentsProvider comments={[]}>
