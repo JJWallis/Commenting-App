@@ -90,6 +90,8 @@ const CommentListItem: React.FC<Props> = ({
 
       // TODO -> React v18 -> research no more useEffect article
 
+      // https://stackoverflow.com/questions/42573017/in-react-es6-why-does-the-input-field-lose-focus-after-typing-a-character
+
       console.log('firing', disabled)
    }, [disabled])
 
