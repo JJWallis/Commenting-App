@@ -79,21 +79,17 @@ const CommentListItem: React.FC<Props> = ({
    }
 
    useEffect(() => {
-      if (!disabled) {
-         textAreaRef.current?.focus()
-         // dispatch({
-         //    type: 'UPDATE_COMMENT',
-         //    id,
-         //    content: search,
-         // })
+      if (textAreaRef.current) {
+         const end = textAreaRef.current.value.length
+         textAreaRef.current.setSelectionRange(end, end)
       }
 
-      // TODO -> React v18 -> research no more useEffect article
-
-      // https://stackoverflow.com/questions/42573017/in-react-es6-why-does-the-input-field-lose-focus-after-typing-a-character
-
-      console.log('firing', disabled)
-   }, [disabled])
+      // dispatch({
+      //    type: 'UPDATE_COMMENT',
+      //    id,
+      //    content: search,
+      // })
+   }, [search])
 
    return (
       <CommentItem key={uuid()} ref={listItemRef}>
@@ -136,6 +132,7 @@ const CommentListItem: React.FC<Props> = ({
             </div>
          </CommentMeta>
          <CommentContent
+            autoFocus
             ref={textAreaRef}
             disabled={disabled}
             data-testid={`edit-comment-input-${idx}`}
